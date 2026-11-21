@@ -1,0 +1,24 @@
+# MounRiver Studio 编译产物
+obj/
+Debug/
+*.o
+*.elf
+*.hex
+*.bin
+*.lst
+*.map
+*.siz
+*.d
+*.expand
+*.sources_list
+
+# MounRiver Studio 工程临时文件
+.mrs/
+.metadata/
+*.wvproj.user
+
+# 编辑器/系统
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

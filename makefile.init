@@ -1,0 +1,20 @@
+################################################################################
+# User extension hook for MounRiver Studio (MRS)
+# Included by obj/makefile via "-include ../makefile.init"
+# Purpose: also generate a raw .bin from the .elf after each build,
+#          so minichlink can flash it without a separate objcopy step.
+#
+# MRS hardcodes the artifact name into obj/makefile (no ARTIFACT_NAME var),
+# so we hardcode it here too. Keep this in sync with the project name.
+################################################################################
+
+PROJ := OLED-Test
+OBJCOPY_BIN := riscv-none-embed-objcopy
+
+# Append a post-build step to the "all" target so the .bin is produced
+# every time MRS builds the project. "all" runs "main-build" via a recursive
+# $(MAKE), then we convert the .elf to .bin right after.
+all: $(PROJ).bin
+
+$(PROJ).bin: $(PROJ).elf
+	@	$(OBJCOPY_BIN) -O binary "$(PROJ).elf" "$(PROJ).bin"
